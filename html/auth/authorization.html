@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+    <h1>Welcome, <span sec:authentication="name"></span>!</h1>
+
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <p>This content is visible to users with the ADMIN role.</p>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_USER')">
+        <p>This content is visible to users with the USER role.</p>
+    </div>
+
+    <div sec:authorize="isAuthenticated()">
+        <p>This content is visible to authenticated users.</p>
+    </div>
+
+    <div sec:authorize="isAnonymous()">
+        <p>This content is visible to unauthenticated users.</p>
+    </div>
+
+<p>Username: <span sec:authentication="name"></span></p>
+<p>Roles: <span sec:authentication="principal.authorities"></span></p>
+
+
